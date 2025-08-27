@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 
-const getOllamaAPIResponse = async (message) => {
+async function getOllamaAPIResponse(message) {
     const options = {
         method: "POST",
         headers: {
@@ -18,7 +18,7 @@ const getOllamaAPIResponse = async (message) => {
     try {
         const response = await fetch("http://localhost:11434/api/chat", options);
         const data = await response.json();
-        return res.send(data.message.content); //reply
+        return data.message.content; //reply
         // console.log(data.message.content); 
 
     } catch (err) {

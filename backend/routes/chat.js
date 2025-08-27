@@ -1,5 +1,6 @@
 import express from "express";
 import Thread from "../models/Thread.js"
+import getOllamaAPIResponse from "../utils/ollama.js"
 
 const router = express.Router();
 
@@ -38,7 +39,7 @@ router.get("/thread/:threadId", async (req, res) => {
     try {
         const thread = await Thread.findOne({ threadId });
 
-        if (thread) {
+        if (!thread) {
             res.status(404).json({ error: "Thread not found" });
         }
 
@@ -60,16 +61,58 @@ router.delete("/thread/:threadId", async (req, res) => {
 
         const deleteThread = await Thread.findOne({ threadId });
 
-        if (!deleteThread) { 
+        if (!deleteThread) {
             res.status(404).json({ error: "Thread not found" });
         }
 
-        res.status(200).json({success:"Thread deleted"});
+        res.status(200).json({ success: "Thread deleted" });
 
-    }catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "failed to fetch thread chat" });
-}
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "failed to delete thread" });
+    }
+});
+
+//chat 
+router.post("/chat", async (req, res) => {
+
+    const { threadId, message } = req.body;
+
+    //step 1 validate
+    if (!threadId || !message) {
+        res.status(400).json({ errro: "missing required fields" });
+    }
+
+    //step 2 if thread is not present then create else access the chat
+
+    try {
+        const thread = await Thread.findOne({threadId});
+
+        if(!thread){
+            //create a new thread
+            thread = new Thread({
+                threadId,
+                title : message,
+                messages : [{role:"user",content : message}]
+            });
+        }else{
+            thread.messages.push({role:"user",content : message});
+        }
+
+        //step 3 save the user message in thread get ollama response
+
+        const asssistantReply = await getOllamaAPIResponse(message);
+
+        thread.messages.push({role:"assistant",content:asssistantReply});
+        thread.updatedAt = new Date();
+
+        await thread.save();
+        res.json({reply:asssistantReply});
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ error: "something went wrong" });
+    }
 });
 
 export default router;
