@@ -26,7 +26,27 @@ router.get("/thread", async(req,res) =>{
         res.json(threads);
     }catch(err){
         console.log(err);
-        res.status(500).json({error:"failed to connect db"});
+        res.status(500).json({error:"failed to fetch thread"});
+    }
+});
+
+//get particular thread
+router.get("/thread/:threadId", async(req,res)=>{
+
+    const {threadId} = req.params;
+
+    try{
+        const thread = await Thread.findOne({threadId});
+
+        if(thread){
+            res.status(404).json({error: "Thread not found"});
+        }
+
+        res.json(thread.messages);
+
+    }catch(err){
+        console.log(err);
+        res.status(500).json({error:"failed to fetch thread chat"});
     }
 });
 
