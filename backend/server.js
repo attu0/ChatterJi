@@ -3,6 +3,7 @@ import cors from "cors";
 import fetch from "node-fetch";
 import mongoose from "mongoose";
 import "dotenv/config";
+import chatRoutes from "./routes/chat.js"
 
 const app = express();
 const PORT = 8080;
@@ -10,6 +11,8 @@ const PORT = 8080;
 // Middleware to parse JSON and enable CORS will be used in frontend integration
 app.use(express.json());
 app.use(cors());
+
+app.use("/api", chatRoutes);
 
 app.listen(PORT, () => {
     console.log(`Server is live on http://localhost:${PORT}`);
