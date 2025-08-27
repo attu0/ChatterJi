@@ -19,4 +19,15 @@ router.post("/test", async(req,res) =>{
     }
 });
 
+//Get all threads
+router.get("/thread", async(req,res) =>{
+    try{
+        const threads = await Thread.find({}).sort({updatedAt : -1}); // to get all threads in descinedg sorted fashion 
+        res.json(threads);
+    }catch(err){
+        console.log(err);
+        res.status(500).json({error:"failed to connect db"});
+    }
+});
+
 export default router;
