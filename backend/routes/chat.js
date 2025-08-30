@@ -37,7 +37,7 @@ router.get("/thread/:threadId", async (req, res) => {
     const { threadId } = req.params;
 
     try {
-        const thread = await Thread.findOne({ threadId });
+        let thread = await Thread.findOne({ threadId });
 
         if (!thread) {
             res.status(404).json({ error: "Thread not found" });
@@ -86,7 +86,7 @@ router.post("/chat", async (req, res) => {
     //step 2 if thread is not present then create else access the chat
 
     try {
-        const thread = await Thread.findOne({threadId});
+        let thread = await Thread.findOne({threadId});
 
         if(!thread){
             //create a new thread
