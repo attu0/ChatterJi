@@ -6,11 +6,11 @@ function ChatWindow(){
         <div className="Chatwindow">
             <div className="navbar">
                 <span>ChatterJi <i class="fa-solid fa-arrow-down"></i></span>
-                <div className="userIconDiv" ><span><i class="fa-solid fa-user"></i></span></div>
+                <div className="userIconDiv" ><span className="userIcon"><i class="fa-solid fa-user"></i></span></div>
             </div>
             <Chat></Chat>
             <div className="chatInput">
-                <div className="userInput">
+                <div className="InputBox">
                     <input placeholder="ask anything...">
 
                     </input>
