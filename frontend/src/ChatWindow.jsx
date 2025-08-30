@@ -1,14 +1,15 @@
 import "./ChatWindow.css";
 import Chat from "./Chat.jsx";
 import { MyContext } from "./MyContext.jsx";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { v1 as uuid } from "uuid";
-import {ScaleLoader} from "react-spinners";
+import { ScaleLoader } from "react-spinners";
 
 function ChatWindow() {
-  const { prompt, setPrompt, reply, setReply } = useContext(MyContext);
+  const { prompt, setPrompt, reply, setReply, prevChats, setPrevChats } =
+    useContext(MyContext);
   const [currThreadId, setcurrThreadId] = useState(uuid());
-  const [loading,setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const getReply = async () => {
     setLoading(true);
@@ -20,11 +21,11 @@ function ChatWindow() {
       body: JSON.stringify({
         message: prompt,
         threadId: currThreadId,
-      })
+      }),
     };
 
     try {
-      const response = await fetch("http://localhost:8080/api/chat",options);
+      const response = await fetch("http://localhost:8080/api/chat", options);
       const res = await response.json();
       console.log(res);
       setReply(res.reply);
@@ -33,6 +34,22 @@ function ChatWindow() {
     }
     setLoading(false);
   };
+
+  //append new chats to previouus chats
+  useEffect(() => {
+    if(prompt && reply){
+      setPrevChats(prevChats =>(
+        [...prevChats,{
+          role:"user",
+          content : prompt
+        },{
+          role:"assistant",
+          content : reply
+        }]
+      ))
+    }
+    setPrompt("");
+  },[reply]);
 
   return (
     <div className="Chatwindow">
@@ -54,7 +71,7 @@ function ChatWindow() {
             placeholder="ask anything..."
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' ? getReply() : ''}
+            onKeyDown={(e) => (e.key === "Enter" ? getReply() : "")}
           ></input>
           <div id="submit" onClick={getReply}>
             <i className="fa-solid fa-paper-plane"></i>
