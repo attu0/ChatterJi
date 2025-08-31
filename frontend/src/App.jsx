@@ -11,12 +11,14 @@ function App() {
   const [currThreadId, setcurrThreadId] = useState(uuid());
   const [prevChats,setPrevChats] = useState([]); // Changed: prevChat -> prevChats
   const [newChat,setNewChat] = useState(true);
+  const [allThreads,setAllThreads] = useState([]);
 
   const providerValue = {
     prompt, setPrompt,
     reply, setReply,
     newChat, setNewChat,
-    prevChats, setPrevChats // Changed: prevChat, setPrevChat -> prevChats, setPrevChats
+    prevChats, setPrevChats, // Changed: prevChat, setPrevChat -> prevChats, setPrevChats
+    allThreads, setAllThreads
   };
   return (
     <div className="app">
