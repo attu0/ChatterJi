@@ -48,7 +48,7 @@ button:hover {
     cursor: pointer;
     padding: 2px 5px;
     margin-bottom: 0.3rem;
-    font-size: 14px;
+    font-size: 1rem;
     border: solid 10px transparent;
     position: relative;
 }

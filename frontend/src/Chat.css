@@ -1,19 +1,20 @@
 .chats {
-    max-width: 700px;
+    max-width: 100%;
     overflow-y: scroll;
     padding: 8rem;
+    overflow: hidden;
 }
 
 .userDiv {
     display: flex;
     justify-content: flex-end;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 
 .gptDiv {
     text-align: left;
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 .userMessage {
