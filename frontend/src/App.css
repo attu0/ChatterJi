@@ -12,3 +12,128 @@ body {
     background-color: #212121;
     display: flex;
 }
+
+.landing-page {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #212121;
+    position: relative;
+}
+
+.header {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.auth-btn {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.signin-btn {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #787878;
+}
+
+.signin-btn:hover {
+    background: #787878;
+    color: #fff;
+}
+
+.signup-btn {
+    background: #787878;
+    color: #fff;
+}
+
+.signup-btn:hover {
+    background: #ffffff;
+    color: #000;
+}
+
+.hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.landing-page h1 {
+    margin-bottom: 16px;
+    font-size: 2.5rem;
+    color: #fff;
+}
+
+.landing-page p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.hero-btn {
+    padding: 12px 32px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.signin {
+    background: transparent;
+    color: #fff;
+    border: 1px solid #787878;
+}
+
+.signin:hover {
+    background: #787878;
+    color: #fff;
+}
+
+.signup {
+    background: #787878;
+    color: #fff;
+}
+
+.signup:hover {
+    background: #ffffff;
+    color: #000;
+}
+
+.start-chat-btn {
+    padding: 12px 32px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: none;
+    background: #787878;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: all 0.3s ease;
+}
+
+.start-chat-btn:hover {
+    background: #ffffff;
+    color: #000;
+}
